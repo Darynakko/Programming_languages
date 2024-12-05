@@ -106,5 +106,21 @@ router.post('/loggedin', function (req, res) {
     });
 });
 
+router.post('/update-book-status', (req, res) => {
+    const { bookId, isRead } = req.body.name;
+  
+    if (!bookId || isRead === undefined) {
+      return res.status(400).send('Invalid request');
+    }
+    const query = `UPDATE books SET is_read = ? WHERE id = ?`;
+    db.query(query, [isRead ? 1 : 0, bookId], (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Database update failed');
+      }
+      res.send('Success');
+    });
+  });
+
 // Export the router object so index.js can access it
 module.exports = router;
