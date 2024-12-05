@@ -3,14 +3,53 @@
   <head>
     <title><%=appName%></title>
     <link rel="stylesheet"  type="text/css" href="/main.css" />
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('.book-read-checkbox');
+        
+        checkboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', async (event) => {
+            const bookId = event.target.dataset.bookId;
+            const isChecked = event.target.checked;
+      
+            try {
+              const response = await fetch('/update-book-status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ bookId, isRead: isChecked })
+              });
+      
+              if (!response.ok) {
+                console.error('Failed to update the database');
+                // Optionally revert the checkbox state
+                event.target.checked = !isChecked;
+              }
+            } catch (error) {
+              console.error('Error:', error);
+              // Optionally revert the checkbox state
+              event.target.checked = !isChecked;
+            }
+          });
+        });
+      });
+      </script>      
   </head>
   <body>
     <h1><%=appName%></h1>
     <h2>Here are the books for studying C++:</h2>
-    <ul>
-      <li><%=availableBooks[0].name%>, <%=availableBooks[0].link%></li>
-      <li><%=availableBooks[1].name%>, <%=availableBooks[1].link%></li>
-      <li><%=availableBooks[2].name%>, <%=availableBooks[2].link%></li>
+    <ul class="database">
+      <li class="database">
+        <label class="container">
+          <a href="<%=availableBooks[0].link%>"><%=availableBooks[0].name%></a>
+          <input type="checkbox" 
+            data-book-id="<%=availableBooks[0].id%>" 
+            class="book-read-checkbox">
+        <span class="checkmark"></span>
+      </label>
+    </li>
+      <li class="database"> <a href="<%=availableBooks[1].link%>"><%=availableBooks[1].name%></a></li>
+      <li class="database"><a href="<%=availableBooks[2].link%>"><%=availableBooks[2].name%></a></li>
     </ul>
+    <p><a href="/">Go back to the main page</a></p>'
   </body>
 </html> 

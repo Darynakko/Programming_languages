@@ -7,10 +7,11 @@
   <body>
     <h1><%=appName%></h1>
     <h2>Here are the books for studying JavaScript:</h2>
-    <ul>
-      <li><%=availableBooks[0].name%>, <%=availableBooks[0].link%></li>
-      <li><%=availableBooks[1].name%>, <%=availableBooks[1].link%></li>
-      <li><%=availableBooks[2].name%>, <%=availableBooks[2].link%></li>
+    <ul class="database">
+      <li class="database"><%=availableBooks[0].name%>, <a href="<%=availableBooks[0].link%>"><%=availableBooks[0].link%></a></li>
+      <li class="database"><%=availableBooks[1].name%>, <a href="<%=availableBooks[1].link%>"><%=availableBooks[1].link%></a></li>
+      <li class="database"><%=availableBooks[2].name%>, <a href="<%=availableBooks[2].link%>"><%=availableBooks[2].link%></a></li>
     </ul>
+    <p><a href="/">Go back to the main page</a></p>'
   </body>
 </html> 
