@@ -9,10 +9,20 @@
     <h1><%=appName%></h1>
     <h2>Here are the books for studying Python:</h2>
     <ul class="database">
-      <li class="database"><%=availableBooks[0].name%>, <a href="<%=availableBooks[0].link%>"><%=availableBooks[0].link%></a></li>
-      <li class="database"><%=availableBooks[1].name%>, <a href="<%=availableBooks[1].link%>"><%=availableBooks[1].link%></a></li>
-      <li class="database"><%=availableBooks[2].name%>, <a href="<%=availableBooks[2].link%>"><%=availableBooks[2].link%></a></li>
-     </ul>
+      <% availableBooks.forEach(book => { %>
+      <li class="database">
+        <label class="container">
+          <!-- <a href="<%=availableBooks[0].link%>"><%=availableBooks[0].name%></a> -->
+          <a href="<%=book.link%>"><%=book.name%></a>
+          <input type="checkbox" 
+            data-book-id="<%=book.id%>" 
+            class="book-read-checkbox">
+            <%= book.is_read ? 'checked' : '' %>
+        <span class="checkmark"></span>
+      </label>
+    </li>
+    <% }) %>
+   </ul>
     <p><a href="/">Go back to the main page</a></p>'
   </body>
 </html> 
