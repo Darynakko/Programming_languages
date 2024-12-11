@@ -1,16 +1,20 @@
 <!doctype html>
 <html>
   <head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <title>Log in for <%=appName%></title>
+    <!-- fonts -->
     <link rel="stylesheet"  type="text/css" href="/main.css" />
   </head>
   <body>
-    <h1>Register for <%=appName%></h1>
-    <form method="POST" action="/loggedin">
-        <p>Email: <input id="email" type="email" name="email" value="email" /></p>
-        <p>Password: <input id="password" type="password" name="password" value="password" /></p>
-        <input type="submit" value="Log in" />
+    <div class="login">
+    <h1>Log in for <%=appName%></h1>
+    <form method="POST" action="/auth">
+        <p>Username: <input id="name" type="text" name="name" placeholder="Username" /></p>
+        <p>Password: <input id="password" type="password" name="password" placeholder="Password" /></p>
+        <input class="button" type="submit" value="Log in" />
       </form>
+    </div>
       <p><a href="/">Go back to the main page</a></p>'
   </body>
 </html>

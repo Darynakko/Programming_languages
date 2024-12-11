@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <title><%=appName%></title>
     <link rel="stylesheet"  type="text/css" href="/main.css" />
     <script>
@@ -11,7 +12,6 @@
           checkbox.addEventListener('change', async (event) => {
             const bookId = event.target.dataset.bookId;
             const isChecked = event.target.checked;
-      
             try {
               const response = await fetch('/update-book-status', {
                 method: 'POST',
@@ -38,18 +38,20 @@
     <h1><%=appName%></h1>
     <h2>Here are the books for studying C++:</h2>
     <ul class="database">
+      <% availableBooks.forEach(book => { %>
       <li class="database">
         <label class="container">
-          <a href="<%=availableBooks[0].link%>"><%=availableBooks[0].name%></a>
+          <!-- <a href="<%=availableBooks[0].link%>"><%=availableBooks[0].name%></a> -->
+          <a href="<%=book.link%>"><%=book.name%></a>
           <input type="checkbox" 
-            data-book-id="<%=availableBooks[0].id%>" 
+            data-book-id="<%=book.id%>" 
             class="book-read-checkbox">
+            <%= book.is_read ? 'checked' : '' %>
         <span class="checkmark"></span>
       </label>
     </li>
-      <li class="database"> <a href="<%=availableBooks[1].link%>"><%=availableBooks[1].name%></a></li>
-      <li class="database"><a href="<%=availableBooks[2].link%>"><%=availableBooks[2].name%></a></li>
-    </ul>
+    <% }) %>
+     </ul>
     <p><a href="/">Go back to the main page</a></p>'
   </body>
 </html> 

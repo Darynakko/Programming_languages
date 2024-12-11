@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1>Welcome, <%= user.username %>!</h1>
+    <h2>Your Books</h2>
+    <ul>
+      <% books.forEach(function(book) { %>
+        <li>
+          <input 
+            type="checkbox" 
+            class="mark-read" 
+            data-book-id="<%= book.id %>" 
+            <%= book.is_read ? "checked" : "" %> 
+          />
+          <a href="<%= book.link %>" target="_blank"><%= book.name %></a>
+        </li>
+      <% }); %>
+    </ul> 
+    <script>
+      document.querySelectorAll('.mark-read').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          fetch('/mark-book', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              bookId: this.dataset.bookId,
+              isRead: this.checked
+            })
+          })
+          .then(response => response.text())
+          .then(message => console.log(message))
+          .catch(error => console.error('Error:', error));
+        });
+      });
+    </script>
+  </body>
+</html>
