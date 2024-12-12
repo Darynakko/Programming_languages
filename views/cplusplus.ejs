@@ -41,7 +41,6 @@
       <% availableBooks.forEach(book => { %>
       <li class="database">
         <label class="container">
-          <!-- <a href="<%=availableBooks[0].link%>"><%=availableBooks[0].name%></a> -->
           <a href="<%=book.link%>"><%=book.name%></a>
           <input type="checkbox" 
             data-book-id="<%=book.id%>" 
@@ -52,6 +51,6 @@
     </li>
     <% }) %>
      </ul>
-    <p><a href="/">Go back to the main page</a></p>'
+    <p><a href="/">Go back to the main page</a></p>
   </body>
 </html> 
